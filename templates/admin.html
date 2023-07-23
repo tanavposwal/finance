@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Admin
+{% endblock %}
+
+{% block main %}
+<main class="container py-5 text-center">
+
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+					USERS
+				</button>
+			</h2>
+			<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+				<div class="accordion-body d-flex justify-content-center">
+					<div class="w-75">
+						<table class="table">
+							<tr class="bg-secondary text-white">
+								<th scope="col">#</th>
+								<th scope="col">Name</th>
+								<th scope="col">Cash</th>
+                                <th scope="col">Modify Cash</th>
+                                <th scope="col">Account</th>
+							</tr>
+			
+							{% for row in rows %}
+							<tr>
+								<th scope="row">{{row["id"]}}</th>
+								<td>{{row["username"]}}</td>
+								<td>{{row["cash"]}}</td>
+                                <td>
+                                    <form action="/admin/incre" class="d-flex" method="post">
+                                        <input type="hidden" value='{{row["id"]}}' name="id">
+                                        <input type="text" required class="form-control" name="to" placeholder="change to">
+                                        <input type="submit" class="btn btn-success btn-sm" value="MODIFY">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="/admin/kick" method="post">
+                                        <input type="hidden" value='{{row["id"]}}' name="id">
+                                        <input type="submit" class="btn btn-danger btn-sm" value="DELETE">
+                                    </form>
+                                </td>
+							</tr>
+							{% endfor %}
+							<!-- make loop -->
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+  	</div>
+
+</main>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+<div>
+    <form action="/buy" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" required autofocus class="form-control mx-auto w-auto" id="symbol2" name="symbol" placeholder="Symbol" type="text">
+            <p id="text2"></p>
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" required id="shares" name="shares" placeholder="Shares" type="number">
+        </div>
+        <button class="btn btn-primary mx-auto w-auto" type="submit">Buy</button>
+    </form>
+</div>
+<script>
+	let inp = document.querySelector("#symbol2")
+	inp.addEventListener("input", async function() {
+		let response = await fetch("/search?q=" + inp.value)
+		let data = await response.json()
+		let txt = data[0] + "." + data[1]
+		document.querySelector("#text2").innerText = "a stock cost: $" + txt
+	})
+</script>
+{% endblock %}
