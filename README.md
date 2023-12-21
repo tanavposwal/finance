@@ -21,7 +21,7 @@ This Flask-based web application allows users to simulate buying and selling sto
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/finance.git
+git clone https://github.com/tanavdev/finance.git
 cd finance
 ```
 
